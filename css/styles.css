@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: Verdana, Tahoma, sans-serif;
+    background-color: aliceblue;
+    color: #1a1a1a;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    align-items: center;
+    padding: 0.625rem 1.25rem;
+    position: sticky;
+    top: 0;
+    overflow-x: hidden;
+    width: 100%;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    color: aliceblue;
+    background: linear-gradient(to bottom right, #208fea, #081d71);
+}
+
+.nav-bar h1 {
+    font-size: 1.5rem;
+}
+
+.bttn-login {
+    margin-left: auto;
+}
+
+button {
+  background: linear-gradient(135deg, #081d71, #208fea);
+  color: aliceblue;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.3);
+  text-shadow: 0.0625rem -0.0625rem 0 #081d71;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #208fea, #081d71);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.375rem 0.5rem rgba(0,0,0,0.4);
+}
+
+a {
+    font-weight: 600;
+    text-decoration: none;
+    color: aliceblue;
+    display: inline-block;
+}
+
+a:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 0.3125rem aliceblue;
+}
+
+a:visited {
+    color: inherit;
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    font-size: x-small;
+    color: aliceblue;
+    background: #081d71;
+}
+
+.footernavigation {
+    text-align: center;
+    font-weight: 600;
+    font-size: small;
+}
+
+.gap {
+    display: inline;
+    text-align: center;
+    font-weight: 600;
+    font-size: small;
+}
