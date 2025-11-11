@@ -1,10 +1,18 @@
+:root {
+    --primary: #208fea;
+    --primary-dark: #081d71;
+    --bg-light: #f6f8fa;
+    --text-dark: #1a1a1a;
+    --accent: #e6eefc;
+}
+
 body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     font-family: Verdana, Tahoma, sans-serif;
-    background-color: aliceblue;
-    color: #1a1a1a;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
 }
 
 html {
@@ -14,106 +22,110 @@ html {
 .nav-bar {
     display: flex;
     justify-content: space-between;
-    position: fixed;
     align-items: center;
-    padding: 0.625rem 1.25rem;
+    padding: 0.9rem 2rem;
     position: sticky;
     top: 0;
-    overflow-x: hidden;
     width: 100%;
-    box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.2);
-    box-sizing: border-box;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.25);
+    background: linear-gradient(to bottom right, var(--primary), var(--primary-dark));
+    color: #fff;
     flex-wrap: wrap;
-    color: aliceblue;
-    background: linear-gradient(to bottom right, #208fea, #081d71);
+    box-sizing: border-box;
+    z-index: 1000;
 }
 
 .nav-bar h1 {
     font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.03rem;
 }
 
 .nav-bar a {
     text-align: center;
     font-weight: 600;
-    font-size: small;
+    font-size: 0.9rem;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-.nav-bar:hover {
-    text-shadow: 0 0 0.3125rem aliceblue;
-}
-
-.nav-bar:visited {
-    color: inherit;
-}
-
-.bttn-login {
-    margin-left: auto;
+.nav-bar a:hover {
+    color: var(--accent);
+    transform: scale(1.05);
 }
 
 button {
-  background: linear-gradient(135deg, #081d71, #208fea);
-  color: aliceblue;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.3);
-  text-shadow: 0.0625rem -0.0625rem 0 #081d71;
-  transition: all 0.3s ease;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
 button:hover {
-  background: linear-gradient(135deg, #208fea, #081d71);
-  transform: translateY(-0.125rem);
-  box-shadow: 0 0.375rem 0.5rem rgba(0,0,0,0.4);
+    background: var(--primary-dark);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.375rem 0.5rem rgba(0, 0, 0, 0.4);
 }
 
 a {
     font-weight: 600;
     text-decoration: none;
-    color: aliceblue;
+    color: var(--primary-dark);
     display: inline-block;
 }
 
 footer {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
     text-align: center;
     font-size: x-small;
-    color: aliceblue;
-    background: #081d71;
+    color: #fff;
+    background: var(--primary-dark);
+}
+
+footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .footernavigation {
     text-align: center;
     font-weight: 600;
-    font-size: small;
+    font-size: x-small;
     position: relative;
+    color: #fff;
+    transition: all 0.3s ease;
 }
 
 .footernavigation:hover {
     transform: scale(1.05);
-    text-shadow: 0 0 0.3125rem aliceblue;
+    color: var(--accent);
 }
 
-.footernavigation:visited {
-    color: inherit;
+.gthb {
+    color: var(--accent);
+    transition: all 0.3s ease;
+    font-size: x-small;
 }
 
 .gthb:hover {
     transform: scale(1.05);
-    text-shadow: 0 0 0.3125rem aliceblue;
+    color: #fff;
 }
 
-.gthb:visited {
-    color: inherit;
-}
 .gap {
     display: inline;
     text-align: center;
     font-weight: 600;
-    font-size: small;
+    font-size: x-small;
+    color: #fff;
 }
 
 .course-link {
@@ -121,7 +133,7 @@ footer {
     display: inline-block;
     font-size: 0.9rem;
     font-weight: 600;
-    color: aliceblue;
+    color: var(--primary-dark);
     text-transform: uppercase;
     text-decoration: none;
     position: relative;
@@ -134,7 +146,7 @@ footer {
     bottom: -0.2rem;
     width: 0;
     height: 0.15rem;
-    background: aliceblue;
+    background: var(--primary);
     transform: translateX(-50%);
     transition: width 0.3s ease;
 }
