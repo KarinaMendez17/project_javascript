@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mock LMS portal - Cursos</title>
+    <title>Mock LMS portal - Admin</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/courses.css">
+    <link rel="stylesheet" href="../css/adminmenu.css">
 </head>
 <body>
     <header>
@@ -18,22 +17,32 @@
         </nav>
     </header>
     
-    <main class="courses">
-        <section class="cTitle">
-            <h2>Cursos</h2>
-            <p>Explora nuestros cursos</p>
-        </section>
+    <div class="admin-info-bar">
+        <h2 id="username">Bienvenid@, Administrador</h2>
+        <div id="datetime"></div>
+    </div>
 
-        <section class="courses-catalog">
-            <div class="course-info">
-                <div class="course-card">
-                    <img src="../image/programming-course.webp">
-                    <h3>Introducción a la Programación</h3>
-                    <a href="#" class="course-link">Ir al curso →</a>
-                </div>
-            </div>
-        </section>
-    </main>
+    <section class="admin-menu">
+        <a href="admin/adminsmenu.html" class="menu-card">
+            <div class="card-img img-admin"></div>
+            <span>Administradores</span>
+        </a>
+
+        <a href="admin/teachersmenu.html" class="menu-card">
+            <div class="card-img img-teacher"></div>
+            <span>Profesores</span>
+        </a>
+
+        <a href="admin/coursesmenu.html" class="menu-card">
+            <div class="card-img img-courses"></div>
+            <span>Cursos</span>
+        </a>
+
+        <a href="admin-panel.html" class="menu-card">
+            <div class="card-img img-students"></div>
+            <span>Alumnos</span>
+        </a>
+    </section>
 
     <footer>
         <ul>
@@ -43,7 +52,7 @@
         </ul>
         <p>
             © 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por: 
-            <a href="https://github.com/KarinaMendez17/" target="_blank">Karina Méndez.</a>
+            <a href="https://github.com/KarinaMendez17/" target="_blank" class="gthb">Karina Méndez.</a>
         </p>
     </footer>
 
@@ -51,8 +60,13 @@
         const session = JSON.parse(localStorage.getItem("session"));
         const navActions = document.querySelector(".nav-actions");
         const loginBtn = document.querySelector(".btn-login");
+        const titulo = document.getElementById("username");
 
-        if (session) {
+        if (!session) {
+            window.location.href = "login.html";
+        } else {
+            titulo.textContent = `Bienvenid@, ${session.name}`;
+
             const dashboardBtn = document.createElement("a");
             dashboardBtn.textContent = "Dashboard";
             dashboardBtn.href = "admin-panel.html";
@@ -68,10 +82,16 @@
             });
 
             navActions.prepend(dashboardBtn);
-        } else {
-            loginBtn.textContent = "Iniciar sesión";
-            loginBtn.href = "login.html";
         }
+
+        function actualizarFechaHora() {
+            const ahora = new Date();
+            const formato = ahora.toLocaleString();
+            document.getElementById("datetime").textContent = formato;
+        }
+
+        setInterval(actualizarFechaHora, 1000);
+        actualizarFechaHora();
     </script>
 </body>
 </html>

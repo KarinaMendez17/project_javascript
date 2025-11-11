@@ -1,0 +1,71 @@
+.admin-info-bar {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: #1a1a1a;
+}
+
+#datetime {
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    white-space: nowrap;
+}
+
+
+.admin-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 60%;
+    margin: 4rem auto;
+}
+
+.menu-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #208fea;
+    color: aliceblue;
+    padding: 0rem;
+    height: 12rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px) scale(1.03);
+}
+
+.card-img {
+    flex: 0 0 45%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+    border-right: 3px solid #081d71;
+}
+
+.menu-card span {
+    flex: 1 1 55%;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    min-width: 0;
+}
+
+.img-admin { background-image: url("../image/admin.webp"); }
+.img-teacher { background-image: url("../image/teacher.webp"); }
+.img-courses { background-image: url("../image/courses.webp"); }
+.img-students { background-image: url("../image/students.webp"); }
+
+.menu-card.debug { outline: 1px solid red; }
+.card-img.debug  { outline: 1px dashed lime; }

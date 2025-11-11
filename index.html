@@ -11,7 +11,9 @@
     <header>
         <nav class="nav-bar">
            <a href="index.html"><h1>Institución Educativa ABC</h1></a>
-            <a href="pages/login.html" class="btn-login">Iniciar Sesión</a>
+           <div class="nav-actions">
+               <a href="pages/login.html" class="btn-login">Iniciar Sesión</a>
+           </div>
         </nav>
     </header>
 
@@ -27,14 +29,84 @@
 
     <section class="course-preview">
         <h3>Cursos Destacados</h3>
-        <input id="searchCourse" type="text" placeholder="Buscar...">
+        <input id="searchCourse" type="text" placeholder="Buscar..." class="input">
         <p>Accede a cursos y contenido educativo de manera sencilla.</p>
+        
         <div class="course-grid">
-            <div class="course-card">1</div>
-            <div class="course-card">1</div>
-            <div class="course-card">1</div>
-            <div class="course-card">1</div>
-            <div class="course-card">1</div>
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <div class="img-inner">
+                        <div class="card-front">
+                            <img src="image/programming-course.webp" alt="Introducción a la Programación">
+                        </div>
+                        <div class="card-back">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Introducción a la Programación</h3>
+                <a href="#" class="course-link">Ir al curso →</a>
+            </div>
+
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <div class="img-inner">
+                        <div class="card-front">
+                            <img src="image/algebra.webp" alt="Álgebra I">
+                        </div>
+                        <div class="card-back">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Álgebra I</h3>
+                <a href="#" class="course-link">Ir al curso →</a>
+            </div>
+
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <div class="img-inner">
+                        <div class="card-front">
+                            <img src="image/classic-mechanics.webp" alt="Introducción a la Mecánica Clásica">
+                        </div>
+                        <div class="card-back">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Introducción a la Mecánica Clásica</h3>
+                <a href="#" class="course-link">Ir al curso →</a>
+            </div>
+
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <div class="img-inner">
+                        <div class="card-front">
+                            <img src="image/english.webp" alt="Inglés I">
+                        </div>
+                        <div class="card-back">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Inglés I</h3>
+                <a href="#" class="course-link">Ir al curso →</a>
+            </div>
+
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <div class="img-inner">
+                        <div class="card-front">
+                            <img src="image/physics.webp" alt="Física I">
+                        </div>
+                        <div class="card-back">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Física I</h3>
+                <a href="#" class="course-link">Ir al curso →</a>
+            </div>
         </div>
     </section>
 
@@ -45,8 +117,36 @@
             <a href="#" class="footernavigation">Contacto</a>
         </ul>
         <p>
-            © 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por: <a href="https://github.com/KarinaMendez17/" target="_blank">Karina Méndez.</a>
+            © 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por: 
+            <a href="https://github.com/KarinaMendez17/" target="_blank" class="footernavigation gthb">Karina Méndez.</a>
         </p>
     </footer>
+
+    <script>
+        const session = JSON.parse(localStorage.getItem("session"));
+        const navActions = document.querySelector(".nav-actions");
+        const loginBtn = document.querySelector(".btn-login");
+
+        if (session) {
+            const dashboardBtn = document.createElement("a");
+            dashboardBtn.textContent = "Dashboard";
+            dashboardBtn.href = "pages/admin-panel.html";
+            dashboardBtn.classList.add("btn-dashboard");
+            dashboardBtn.style.marginRight = "1rem";
+
+            loginBtn.textContent = "Cerrar sesión";
+            loginBtn.href = "#";
+            loginBtn.addEventListener("click", e => {
+                e.preventDefault();
+                localStorage.removeItem("session");
+                window.location.href = "pages/login.html";
+            });
+
+            navActions.prepend(dashboardBtn);
+        } else {
+            loginBtn.textContent = "Iniciar sesión";
+            loginBtn.href = "pages/login.html";
+        }
+    </script>
 </body>
 </html>

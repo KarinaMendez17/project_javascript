@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mock LMS portal - Cursos</title>
+    <title>Mock LMS portal - Login</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/login.css">
 </head>
@@ -15,26 +15,27 @@
         </nav>
     </header>
     
-    <!--Login-->
     <section class="login">
         <div class="login-box">
             <h2>¡Bienvenid@!</h2>
 
-        <form>
-            <div class="input-group">
-                <label>Email:</label>
-                <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
-            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label>Email:</label>
+                    <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
+                </div>
 
-            <div class="input-group">
-                <label>Contraseña:</label>
-                <input type="password" id="login-password" placeholder="**********" required>
-            </div>
+                <div class="input-group">
+                    <label>Contraseña:</label>
+                    <input type="password" id="login-password" placeholder="**********" required>
+                </div>
 
-            <button class="login-button">Entrar</button>
-        </form>
+                <p id="login-error" class="hidden">Correo o contraseña incorrectos.</p>
+                <button class="login-button">Entrar</button>
+            </form>
         </div>
     </section>
+
     <footer>
         <ul>
             <a href="../index.html" class="footernavigation">Inicio</a><p class="gap"> | </p>
@@ -42,8 +43,70 @@
             <a href="#" class="footernavigation">Contacto</a>
         </ul>
         <p>
-            © 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por: <a href="https://github.com/KarinaMendez17/" target="_blank">Karina Méndez.</a>
+            © 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por: 
+            <a href="https://github.com/KarinaMendez17/" target="_blank" class="gthb">Karina Méndez.</a>
         </p>
     </footer>
+
+    <script>
+        function lsLoad(key) {
+            return JSON.parse(localStorage.getItem(key)) || [];
+        }
+        function lsSave(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        const session = JSON.parse(localStorage.getItem("session"));
+        const loginBtn = document.querySelector(".btn-login");
+
+        if (session) {
+            loginBtn.textContent = "Cerrar sesión";
+            loginBtn.href = "#";
+            loginBtn.addEventListener("click", e => {
+                e.preventDefault();
+                localStorage.removeItem("session");
+                window.location.href = "login.html";
+            });
+        } else {
+            loginBtn.textContent = "Iniciar sesión";
+            loginBtn.href = "login.html";
+        }
+
+        if (session) {
+            window.location.href = "admin-panel.html";
+        }
+
+        document.getElementById("login-form").addEventListener("submit", e => {
+            e.preventDefault();
+
+            const email = document.getElementById("login-email").value.trim();
+            const password = document.getElementById("login-password").value.trim();
+            const errorMsg = document.getElementById("login-error");
+            const admins = lsLoad("admins");
+
+            errorMsg.classList.add("hidden");
+
+            if (!email || !password) {
+                return;
+            }
+
+            const user = admins.find(a => a.email === email && a.password === password);
+
+            if (user) {
+                localStorage.setItem("session", JSON.stringify({
+                    id: user.id,
+                    name: user.aName,
+                    email: user.email,
+                    role: "admin",
+                    loggedAt: new Date().toISOString()
+                }));
+
+                window.location.href = "admin-panel.html";
+            } else {
+                errorMsg.classList.remove("hidden");
+            }
+        });
+    </script>
+
 </body>
 </html>
