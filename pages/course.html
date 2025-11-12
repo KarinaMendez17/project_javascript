@@ -1,74 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalles del Curso</title>
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/course.css">
-</head>
-<body>
-  <header>
-    <nav class="nav-bar">
-      <a href="../index.html"><h1>Institución Educativa ABC</h1></a>
-      <div class="nav-actions">
-        <a href="login.html" class="btn-login">Iniciar Sesión</a>
-      </div>
-    </nav>
-  </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detalles del Curso</title>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/course.css">
+    </head>
+    <body>
+        <header>
+            <nav class="nav-bar">
+                <a href="../index.html"><h1>Institución Educativa ABC</h1></a>
+                <div class="nav-actions">
+                    <a href="login.html" class="btn-login">Iniciar Sesión</a>
+                </div>
+            </nav>
+        </header>
 
-  <main id="course-container" class="course-container">
-    <section class="course-header">
-      <img src="../image/default-course.webp" alt="Imagen del curso" class="course-img">
-      <h2>Nombre del Curso</h2>
-      <div class="teacher-info">
-        Impartido por: <span id="teacher-name">Nombre del Profesor</span>
-      </div>
-      <p>Descripción del curso aquí.</p>
-    </section>
+        <main id="course-container" class="course-container">
+            <section class="course-header">
+                <!-- El src se deja vacío para que JS coloque la imagen real del curso -->
+                <img src="" alt="Imagen del curso" class="course-img">
+                <h2>Nombre del Curso</h2>
+                <div class="teacher-info">
+                    Impartido por: <span id="teacher-name">Nombre del Profesor</span>
+                </div>
+                <p>Descripción del curso aquí.</p>
+            </section>
 
-    <section class="modules">
-      <h3>Módulos</h3>
-    </section>
-  </main>
+            <section class="modules">
+                <h3>Módulos</h3>
+            </section>
+        </main>
 
-  <footer>
-    <ul>
-      <a href="../index.html" class="footernavigation">Inicio</a><p class="gap"> | </p>
-      <a href="courses.html" class="footernavigation">Cursos</a><p class="gap"> | </p>
-      <a href="#" class="footernavigation">Contacto</a>
-    </ul>
-    <p>© 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por:
-      <a href="https://github.com/KarinaMendez17/" target="_blank" class="footernavigation gthb">Karina Méndez.</a>
-    </p>
-  </footer>
+        <footer>
+            <ul>
+                <a href="../index.html" class="footernavigation">Inicio</a><p class="gap"> | </p>
+                <a href="courses.html" class="footernavigation">Cursos</a><p class="gap"> | </p>
+                <a href="#" class="footernavigation">Contacto</a>
+            </ul>
+            <p>© 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por:
+                <a href="https://github.com/KarinaMendez17/" target="_blank" class="footernavigation gthb">Karina Méndez.</a>
+            </p>
+        </footer>
 
-  <script>
-    const session = JSON.parse(localStorage.getItem("session"));
-    const navActions = document.querySelector(".nav-actions");
-    const loginBtn = document.querySelector(".btn-login");
+        <script>
+            const session = JSON.parse(localStorage.getItem("session"));
+            const navActions = document.querySelector(".nav-actions");
+            const loginBtn = document.querySelector(".btn-login");
 
-    if (session) {
-      const dashboardBtn = document.createElement("a");
-      dashboardBtn.textContent = "Dashboard";
-      dashboardBtn.href = "admin-panel.html";
-      dashboardBtn.classList.add("btn-dashboard");
-      dashboardBtn.style.marginRight = "1rem";
+            if (session) {
+                const dashboardBtn = document.createElement("a");
+                dashboardBtn.textContent = "Dashboard";
+                dashboardBtn.href = "admin-panel.html";
+                dashboardBtn.classList.add("btn-dashboard");
+                dashboardBtn.style.marginRight = "1rem";
 
-      loginBtn.textContent = "Cerrar sesión";
-      loginBtn.href = "#";
-      loginBtn.addEventListener("click", e => {
-        e.preventDefault();
-        localStorage.removeItem("session");
-        window.location.href = "login.html";
-      });
+                loginBtn.textContent = "Cerrar sesión";
+                loginBtn.href = "#";
+                loginBtn.addEventListener("click", e => {
+                    e.preventDefault();
+                    localStorage.removeItem("session");
+                    window.location.href = "login.html";
+                });
 
-      navActions.prepend(dashboardBtn);
-    } else {
-      loginBtn.textContent = "Iniciar sesión";
-      loginBtn.href = "login.html";
-    }
-  </script>
-  <script src="../components/course.js"></script>
-</body>
+                navActions.prepend(dashboardBtn);
+            } else {
+                loginBtn.textContent = "Iniciar sesión";
+                loginBtn.href = "login.html";
+            }
+        </script>
+
+        <script src="../components/course.js"></script>
+    </body>
 </html>

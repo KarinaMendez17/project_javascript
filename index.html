@@ -1,78 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mock LMS portal - Inicio</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/home.css">
-</head>
-<body>
-    <header>
-        <nav class="nav-bar">
-           <a href="index.html"><h1>Institución Educativa ABC</h1></a>
-           <div class="nav-actions">
-               <a href="pages/login.html" class="btn-login">Iniciar Sesión</a>
-           </div>
-        </nav>
-    </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mock LMS portal - Inicio</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/home.css">
+    </head>
+    <body>
+        <header>
+            <nav class="nav-bar">
+                <a href="index.html"><h1>Institución Educativa ABC</h1></a>
+                <div class="nav-actions">
+                    <a href="./pages/login.html" class="btn-login">Iniciar Sesión</a>
+                </div>
+            </nav>
+        </header>
 
-    <section class="hero">
-        <div class="hero-banner">
-            <img src="image/hero.webp" width="1920" height="500" class="hero-img" alt="Banner principal">
-            <div class="hero-txt">
-                <h2 class="banner-text">Mejora tu aprendizaje, crece cada día</h2>
-                <a href="pages/courses.html"><button class="bttn">Ver Cursos</button></a>
+        <section class="hero">
+            <div class="hero-banner">
+                <img src="image/hero.webp" width="1920" height="500" class="hero-img" alt="Banner principal">
+                <div class="hero-txt">
+                    <h2 class="banner-text">Mejora tu aprendizaje, crece cada día</h2>
+                    <a href="pages/courses.html"><button class="bttn">Ver Cursos</button></a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="course-preview">
-        <h3>Cursos Destacados</h3>
-        <input id="searchCourse" type="text" placeholder="Buscar..." class="input">
-        <p>Accede a cursos y contenido educativo de manera sencilla.</p>
-        <div class="course-grid"></div>
-    </section>
+        <section class="course-preview">
+            <h3>Cursos Destacados</h3>
+            <input id="searchCourse" type="text" placeholder="Buscar..." class="input">
+            <p>Accede a cursos y contenido educativo de manera sencilla.</p>
+            <div class="course-grid"></div>
+        </section>
 
-    <footer>
-        <ul>
-            <a href="index.html" class="footernavigation">Inicio</a><p class="gap"> | </p>
-            <a href="pages/courses.html" class="footernavigation">Cursos</a><p class="gap"> | </p>
-            <a href="#" class="footernavigation">Contacto</a>
-        </ul>
-        <p>
-            © 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por: 
-            <a href="https://github.com/KarinaMendez17/" target="_blank" class="footernavigation gthb">Karina Méndez.</a>
-        </p>
-    </footer>
+        <footer>
+            <ul>
+                <a href="index.html" class="footernavigation">Inicio</a><p class="gap"> | </p>
+                <a href="pages/courses.html" class="footernavigation">Cursos</a><p class="gap"> | </p>
+                <a href="#" class="footernavigation">Contacto</a>
+            </ul>
+            <p>
+                © 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por: 
+                <a href="https://github.com/KarinaMendez17/" target="_blank" class="footernavigation gthb">Karina Méndez.</a>
+            </p>
+        </footer>
+        
+        <script src="components/init.js"></script>
+        <script src="components/courses-list.js"></script>
+        <script src="components/searchbar.js"></script>
 
-    <script>
-        const session = JSON.parse(localStorage.getItem("session"));
-        const navActions = document.querySelector(".nav-actions");
-        const loginBtn = document.querySelector(".btn-login");
 
-        if (session) {
-            const dashboardBtn = document.createElement("a");
-            dashboardBtn.textContent = "Dashboard";
-            dashboardBtn.href = "pages/admin-panel.html";
-            dashboardBtn.classList.add("btn-dashboard");
-            dashboardBtn.style.marginRight = "1rem";
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const session = JSON.parse(localStorage.getItem("session"));
+                const navActions = document.querySelector(".nav-actions");
+                const loginBtn = document.querySelector(".btn-login");
 
-            loginBtn.textContent = "Cerrar sesión";
-            loginBtn.href = "#";
-            loginBtn.addEventListener("click", e => {
-                e.preventDefault();
-                localStorage.removeItem("session");
-                window.location.href = "pages/login.html";
+                // Elimina dashboards previos si el script se ejecuta dos veces
+                const existingDashboard = document.querySelector(".btn-dashboard");
+                if (existingDashboard) existingDashboard.remove();
+
+                if (session) {
+                    const dashboardBtn = document.createElement("a");
+                    dashboardBtn.textContent = "Dashboard";
+                    dashboardBtn.href = "./pages/admin-panel.html";
+                    dashboardBtn.classList.add("btn-dashboard");
+                    dashboardBtn.style.marginRight = "1rem";
+                    navActions.prepend(dashboardBtn);
+
+                    loginBtn.textContent = "Cerrar sesión";
+                    loginBtn.href = "#";
+                    loginBtn.addEventListener("click", e => {
+                        e.preventDefault();
+                        localStorage.removeItem("session");
+                        window.location.href = "./pages/login.html";
+                    });
+                } else {
+                    loginBtn.textContent = "Iniciar sesión";
+                    loginBtn.href = "./pages/login.html";
+                }
             });
+        </script>
 
-            navActions.prepend(dashboardBtn);
-        } else {
-            loginBtn.textContent = "Iniciar sesión";
-            loginBtn.href = "pages/login.html";
-        }
-    </script>
-
-    <script src="components/searchbar.js"></script>
-</body>
+        <script src="components/searchbar.js"></script>
+    </body>
 </html>

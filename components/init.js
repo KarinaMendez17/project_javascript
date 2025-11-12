@@ -1,46 +1,46 @@
-function lsLoad(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key)) || [];
-  } catch (e) {
-    console.error("Error parsing localStorage key", key, e);
-    return [];
-  }
-}
+(function initLocalStorage() {
+    function lsLoad(key) {
+        try {
+            return JSON.parse(localStorage.getItem(key)) || [];
+        } catch (e) {
+            console.error("Error parsing localStorage key", key, e);
+            return [];
+        }
+    }
 
-function lsSave(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
+    function lsSave(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+    }
 
-function lsInitIfEmpty(key, initialArray = []) {
-  if (!localStorage.getItem(key)) {
-    lsSave(key, initialArray);
-  }
-}
+    function lsInitIfEmpty(key, initialArray = []) {
+        if (!localStorage.getItem(key)) {
+            lsSave(key, initialArray);
+            console.log(`"${key}" inicializado con datos por defecto.`);
+        }
+    }
 
-//Admin
-lsInitIfEmpty("admins", [
-  {
-    id: "0001",
-    aName: "Allied Mastercomputer",
-    email: "AM@example.com",
-    phone: "555-1234",
-    password: "ergosum",
-    role: "admin"
-  }
-]);
+    lsInitIfEmpty("admins", [
+        {
+            id: "0001",
+            aName: "Allied Mastercomputer",
+            email: "AM@example.com",
+            phone: "555-1234",
+            password: "ergosum",
+            role: "admin"
+        }
+    ]);
 
-//Teachers
-lsInitIfEmpty("teachers", [
-  {
-    code: "T001",
-    id: "123",
-    tName: "Ted",
-    tLastName: "Anderson",
-    tStatus: "active",
-    img_url: "#",
-    academic_area: [],
-  }
-]);
+    lsInitIfEmpty("teachers", [
+        {
+            code: "T001",
+            id: "123",
+            tName: "Ted",
+            tLastName: "Anderson",
+            tStatus: "active",
+            img_url: "#",
+            academic_area: []
+        }
+    ]);
 
 lsInitIfEmpty("courses", [
     {
@@ -180,4 +180,4 @@ lsInitIfEmpty("courses", [
     }
 ]);
 
-
+})();
