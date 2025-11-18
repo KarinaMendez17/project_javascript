@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock LMS portal - Listado de Profesores</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/submenu.css">
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+           <a href="../../index.html"><h1>Institución Educativa ABC</h1></a>
+           <div class="nav-actions">
+               <a href="../login.html" class="btn-login">Iniciar Sesión</a>
+           </div>
+        </nav>
+    </header>
+
+    <div id="datetime"></div>
+
+    <main>
+        <h1 class="title-list">Listado de Alumnos</h1>
+        <button id="btn-new-teacher" class="btn-new">Nuevo</button>
+        <div id="students-list"></div>
+        <form id="student-form" class="hidden">
+            <input type="text" id="aName" placeholder="Nombre" required>
+            <input type="text" id="aLastName" placeholder="Apellidos" required>
+
+            <select id="aidType" required>
+                <option value="">Tipo de documento</option>
+                <option value="CC">CC</option>
+                <option value="TI">TI</option>
+                <option value="CE">CE</option>
+            </select>
+
+            <input type="number" id="aidNumber" placeholder="Número de documento" maxlength="3" required>
+
+
+            <select id="agender" required>
+                <option value="">Género</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <input type="date" id="bdate" required>
+            <input type="text" id="address" placeholder="Dirección" required>
+            <input type="number" id="phone" placeholder="Teléfono" required>
+
+            <section id="courses-section">
+                <h3>Cursos asignados</h3>
+                <div id="teacher-courses"></div>
+                <button type="button" id="btn-add-course">+ Agregar curso</button>
+            </section>
+
+            <button type="submit">Guardar</button>
+            <button type="button" id="btn-cancel">Cancelar</button>
+        </form>
+    </main>
+
+    <script src="../../modules/local-storage.js"></script>
+    <script src="../../components/students.js"></script>
+    <script src="../../components/session.js"></script>
+
+    <footer>
+        <ul>
+            <a href="../../index.html" class="footernavigation">Inicio</a><p class="gap"> | </p>
+            <a href="../courses.html" class="footernavigation">Cursos</a><p class="gap"> | </p>
+            <a href="#" class="footernavigation">Contacto</a>
+        </ul>
+        <p>
+            © 2025 Institución ABC. Todos los derechos reservados. | Hecho con 💀 por: 
+            <a href="https://github.com/KarinaMendez17/" target="_blank" class="gthb">Karina Méndez.</a>
+        </p>
+    </footer>
+
+</body>
+</html>

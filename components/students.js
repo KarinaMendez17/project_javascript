@@ -7,23 +7,21 @@ function lsSave(key, data) {
 }
 
 function generarCodigo() {
-    const teachers = lsLoad("teachers");
-    if (teachers.length === 0) return "T001";
-    const lastCode = teachers[teachers.length - 1].code;
+    const students = lsLoad("students");
+    if (students.length === 0) return "A001";
+    const lastCode = students[students.length - 1].code;
     const num = parseInt(lastCode.slice(1)) + 1;
     return `T${String(num).padStart(3, "0")}`;
 }
 
 function render() {
-    const cont = document.getElementById("teachers-list");
-    const data = lsLoad("teachers");
+    const cont = document.getElementById("students-list");
+    const data = lsLoad("students");
     cont.innerHTML = data
         .map(
             (t) => `
             <div class="row" data-id="${t.id}">
-                <img src="${t.img_url || "default.png"}" alt="Foto" class="teacher-img">
-                <span>${t.tName} ${t.tLastName} (${t.code}) — ${t.idType || ""} ${t.idNumber || ""} — 
-                <em>${t.tStatus}</em> — 
+                <span>${t.aName} ${t.aLastName} (${t.acode}) — ${t.idType || ""} ${t.aidNumber || ""} — ${t.agender || ""} — ${t.address|| ""} — ${t.phone || ""} 
                 <strong>${(t.academic_area && t.academic_area.length > 0) ? t.academic_area.join(", ") : "Sin cursos asignados"}</strong></span>
                 <button class="edit">Editar</button>
                 <button class="delete">Eliminar</button>
@@ -32,13 +30,12 @@ function render() {
         .join("");
 }
 
-const form = document.getElementById("teacher-form");
+const form = document.getElementById("student-form");
 const btnNew = document.getElementById("btn-new-teacher");
-const nameInput = document.getElementById("tName");
-const lastNameInput = document.getElementById("tLastName");
-const idTypeSelect = document.getElementById("idType");
-const idNumberInput = document.getElementById("idNumber");
-const imgInput = document.getElementById("img_file");
+const nameInput = document.getElementById("aName");
+const lastNameInput = document.getElementById("aLastName");
+const idTypeSelect = document.getElementById("aidType");
+const idNumberInput = document.getElementById("aidNumber");
 const btnCancel = document.getElementById("btn-cancel");
 const coursesContainer = document.getElementById("teacher-courses");
 const btnAddCourse = document.getElementById("btn-add-course");
@@ -47,7 +44,6 @@ const previewImg = document.createElement("img");
 previewImg.style.maxWidth = "100px";
 previewImg.style.display = "block";
 previewImg.style.marginTop = "10px";
-imgInput.parentNode.insertBefore(previewImg, imgInput.nextSibling);
 
 idNumberInput.setAttribute("maxlength", "3");
 idNumberInput.addEventListener("input", (e) => {
@@ -56,7 +52,6 @@ idNumberInput.addEventListener("input", (e) => {
 
 function llenarCursosDisponibles() {
     const courses = lsLoad("courses");
-    const libres = courses.filter((c) => !c.teacher || c.teacher === "");
     if (!libres.length) return `<option value="">No hay cursos libres</option>`;
     return (
         `<option value="">Seleccione un curso...</option>` +
@@ -109,74 +104,68 @@ btnNew.addEventListener("click", () => {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const teachers = lsLoad("teachers");
+    const students = lsLoad("students");
     const courses = lsLoad("courses");
     const editingId = form.dataset.editing;
-    const idType = idTypeSelect.value.trim();
-    const idNumber = idNumberInput.value.trim();
-    const tName = nameInput.value.trim();
-    const tLastName = lastNameInput.value.trim();
+    const aidType = idTypeSelect.value.trim();
+    const aidNumber = idNumberInput.value.trim();
+    const aName = nameInput.value.trim();
+    const aLastName = lastNameInput.value.trim();
     const assignedCourses = [...document.querySelectorAll(".teacher-course")]
         .map((sel) => sel.value)
         .filter((v) => v);
-    const tStatus = assignedCourses.length > 0 ? "active" : "inactive";
 
-    if (!idType || !idNumber || !tName || !tLastName) {
+    if (!aidType || !aidNumber || !aName || !aLastName) {
         alert("Completa todos los campos antes de guardar.");
         return;
     }
 
     const handleSave = (img_url) => {
         if (editingId && editingId !== "") {
-            const teacher = teachers.find((t) => t.id == editingId);
+            const student = students.find((t) => t.id == editingId);
 
             courses.forEach((c) => {
-                if (teacher.academic_area?.includes(c.code)) {
-                    c.teacher = "";
+                if (student.academic_area?.includes(c.code)) {
+                    c.student = "";
                 }
             });
 
             assignedCourses.forEach((cCode) => {
                 const curso = courses.find((c) => c.code === cCode);
-                if (curso) curso.teacher = teacher.code;
+                if (curso) curso.student = student.code;
             });
 
-            teacher.idType = idType;
-            teacher.idNumber = idNumber;
-            teacher.tName = tName;
-            teacher.tLastName = tLastName;
-            teacher.img_url = img_url || teacher.img_url;
-            teacher.academic_area = assignedCourses;
-            teacher.tStatus = tStatus;
+            student.aidType = aidType;
+            student.aidNumber = aidNumber;
+            student.aName = aName;
+            student.aLastName = aLastName;
+            student.agender = agender;
+            student.address = address;
+            student.phone = phone;
+            student.academic_area = assignedCourses;
         } else {
             const code = generarCodigo();
 
             assignedCourses.forEach((cCode) => {
                 const curso = courses.find((c) => c.code === cCode);
-                if (curso) curso.teacher = code;
+                if (curso) curso.student = code;
             });
 
-            teachers.push({
+            students.push({
                 id: Date.now(),
-                idType,
-                idNumber,
-                tName,
-                tLastName,
+                aidType,
+                aidNumber,
+                aName,
+                aLastName,
+                agender,
+                address,
+                phone,
                 academic_area: assignedCourses,
-                tStatus,
                 code,
-                img_url,
             });
         }
 
-        teachers.forEach((t) => {
-            const cursosAsignados = courses.filter((c) => c.teacher === t.code).map((c) => c.code);
-            t.academic_area = cursosAsignados;
-            t.tStatus = cursosAsignados.length > 0 ? "active" : "inactive";
-        });
-
-        lsSave("teachers", teachers);
-        lsSave("courses", courses);
+        lsSave("students", students);
         render();
         form.classList.add("hidden");
         form.reset();
@@ -185,23 +174,14 @@ form.addEventListener("submit", (e) => {
         coursesContainer.innerHTML = "";
         delete form.dataset.editing;
     };
-
-    if (imgInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => handleSave(e.target.result);
-        reader.readAsDataURL(imgInput.files[0]);
-    } else {
-        handleSave();
-    }
 });
 
 
-
-function cargarCursosProfesor(teacher) {
+function cargarCursosProfesor(student) {
     coursesContainer.innerHTML = "";
     const courses = lsLoad("courses");
 
-    (teacher.academic_area || []).forEach((curso) => {
+    (student.academic_area || []).forEach((curso) => {
         const div = document.createElement("div");
         div.classList.add("course-entry");
         div.innerHTML = `
@@ -218,26 +198,25 @@ function cargarCursosProfesor(teacher) {
     });
 }
 
-document.getElementById("teachers-list").addEventListener("click", (e) => {
+document.getElementById("students-list").addEventListener("click", (e) => {
     const row = e.target.closest(".row");
     if (!row) return;
     const id = Number(row.dataset.id);
-    const teachers = lsLoad("teachers");
-    const teacher = teachers.find((t) => String(t.id) === String(id));
+    const teachers = lsLoad("students");
+    const teacher = students.find((t) => String(t.id) === String(id));
 
     if (e.target.classList.contains("delete")) {
-        if (teacher.tStatus !== "inactive") {
+        if (student.aStatus !== "inactive") {
             alert("No puedes eliminar a un profesor activo. Desasigna sus cursos primero.");
             return;
         }
-        if (confirm(`¿Eliminar a ${teacher.tName} ${teacher.tLastName}?`)) {
-            const filtered = teachers.filter((t) => t.id !== id);
+        if (confirm(`¿Eliminar a ${student.aName} ${student.aLastName}?`)) {
+            const filtered = students.filter((t) => t.aid !== aid);
             const courses = lsLoad("courses");
             courses.forEach((c) => {
-                if (c.teacher === teacher.code) c.teacher = "";
+                if (c.student === student.code) c.student = "";
             });
-            lsSave("teachers", filtered);
-            lsSave("courses", courses);
+            lsSave("students", filtered);
             render();
         }
         return;

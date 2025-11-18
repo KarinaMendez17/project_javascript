@@ -49,40 +49,5 @@
         <script src="components/init.js"></script>
         <script src="components/courses-list.js"></script>
         <script src="components/searchbar.js"></script>
-
-
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const session = JSON.parse(localStorage.getItem("session"));
-                const navActions = document.querySelector(".nav-actions");
-                const loginBtn = document.querySelector(".btn-login");
-
-                // Elimina dashboards previos si el script se ejecuta dos veces
-                const existingDashboard = document.querySelector(".btn-dashboard");
-                if (existingDashboard) existingDashboard.remove();
-
-                if (session) {
-                    const dashboardBtn = document.createElement("a");
-                    dashboardBtn.textContent = "Dashboard";
-                    dashboardBtn.href = "./pages/admin-panel.html";
-                    dashboardBtn.classList.add("btn-dashboard");
-                    dashboardBtn.style.marginRight = "1rem";
-                    navActions.prepend(dashboardBtn);
-
-                    loginBtn.textContent = "Cerrar sesión";
-                    loginBtn.href = "#";
-                    loginBtn.addEventListener("click", e => {
-                        e.preventDefault();
-                        localStorage.removeItem("session");
-                        window.location.href = "./pages/login.html";
-                    });
-                } else {
-                    loginBtn.textContent = "Iniciar sesión";
-                    loginBtn.href = "./pages/login.html";
-                }
-            });
-        </script>
-
-        <script src="components/searchbar.js"></script>
     </body>
 </html>

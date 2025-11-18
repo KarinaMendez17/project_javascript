@@ -39,8 +39,7 @@
             const session = JSON.parse(localStorage.getItem("session"));
             const navActions = document.querySelector(".nav-actions");
             const loginBtn = document.querySelector(".btn-login");
-
-            // Si hay sesión activa, personalizar el header
+            
             if (session) {
                 const dashboardBtn = document.createElement("a");
                 dashboardBtn.textContent = "Dashboard";
@@ -57,7 +56,6 @@
                     window.location.reload();
                 });
             } else {
-                // Sin sesión: mantener visible el botón de inicio de sesión normal
                 loginBtn.textContent = "Iniciar sesión";
                 loginBtn.href = "login.html";
             }

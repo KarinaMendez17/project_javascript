@@ -180,4 +180,17 @@ lsInitIfEmpty("courses", [
     }
 ]);
 
+//Alumnos
+lsInitIfEmpty("students", [
+    {
+      code: "A001",
+      aid: "123",
+      aName: "Six",
+      aLastName: "D'AM",
+      gender: "Otro",
+      bDate: "05/01/1999",
+      address: "si #6",
+      phone: "7446568598",
+    }
+  ]);
 

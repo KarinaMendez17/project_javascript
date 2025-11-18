@@ -16,7 +16,6 @@ document.getElementById("login-form").addEventListener("submit", e => {
   const user = admins.find(a => a.email === email && a.password === password);
 
   if (user) {
-    // Guardar sesión activa
     localStorage.setItem("session", JSON.stringify({
       id: user.id,
       name: user.aName,

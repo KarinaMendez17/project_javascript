@@ -49,65 +49,7 @@
     </footer>
 
     <script src="../components/init.js"></script>
-    <script>
-        function lsLoad(key) {
-            return JSON.parse(localStorage.getItem(key)) || [];
-        }
-        function lsSave(key, data) {
-            localStorage.setItem(key, JSON.stringify(data));
-        }
-
-        const session = JSON.parse(localStorage.getItem("session"));
-        const loginBtn = document.querySelector(".btn-login");
-
-        if (session) {
-            loginBtn.textContent = "Cerrar sesión";
-            loginBtn.href = "#";
-            loginBtn.addEventListener("click", e => {
-                e.preventDefault();
-                localStorage.removeItem("session");
-                window.location.href = "login.html";
-            });
-        } else {
-            loginBtn.textContent = "Iniciar sesión";
-            loginBtn.href = "login.html";
-        }
-
-        if (session) {
-            window.location.href = "admin-panel.html";
-        }
-
-        document.getElementById("login-form").addEventListener("submit", e => {
-            e.preventDefault();
-
-            const email = document.getElementById("login-email").value.trim();
-            const password = document.getElementById("login-password").value.trim();
-            const errorMsg = document.getElementById("login-error");
-            const admins = lsLoad("admins");
-
-            errorMsg.classList.add("hidden");
-
-            if (!email || !password) {
-                return;
-            }
-
-            const user = admins.find(a => a.email === email && a.password === password);
-
-            if (user) {
-                localStorage.setItem("session", JSON.stringify({
-                    id: user.id,
-                    name: user.aName,
-                    email: user.email,
-                    role: "admin",
-                    loggedAt: new Date().toISOString()
-                }));
-
-                window.location.href = "admin-panel.html";
-            } else {
-                errorMsg.classList.remove("hidden");
-            }
-        });
-    </script>
+    <script src="../components/login.js"></script>
 
 </body>
 </html>
